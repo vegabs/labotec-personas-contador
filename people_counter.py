@@ -191,12 +191,14 @@ def people_counter():
 					# construct a dlib rectangle object from the bounding
 					# box coordinates and then start the dlib correlation
 					# tracker
+					# GABY: aqui se usa dlib
 					tracker = dlib.correlation_tracker()
 					rect = dlib.rectangle(startX, startY, endX, endY)
 					tracker.start_track(rgb, rect)
 
 					# add the tracker to our list of trackers so we can
 					# utilize it during skip frames
+					# GABY: 'trackers' is just a list!
 					trackers.append(tracker)
 
 		# otherwise, we should utilize our object *trackers* rather than
@@ -213,6 +215,7 @@ def people_counter():
 				pos = tracker.get_position()
 
 				# unpack the position object
+				# GABY: resultado del tracking en X y Y
 				startX = int(pos.left())
 				startY = int(pos.top())
 				endX = int(pos.right())
@@ -225,7 +228,7 @@ def people_counter():
 		# object crosses this line we will determine whether they were
 		# moving 'up' or 'down'
 		cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
-		cv2.putText(frame, "-Prediction border - Entrance-", (10, H - ((i * 20) + 200)),
+		cv2.putText(frame, "-Borde de prediccion - Entrada-", (10, H - ((i * 20) + 200)),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
 
 		# use the centroid tracker to associate the (1) old object
@@ -306,7 +309,7 @@ def people_counter():
 		]
 
 		info_total = [
-		("Total people inside", ', '.join(map(str, total))),
+		("Total personas dentro", ', '.join(map(str, total))),
 		]
 
 		# display the output
@@ -327,7 +330,7 @@ def people_counter():
 			writer.write(frame)
 
 		# show the output frame
-		cv2.imshow("Real-Time Monitoring/Analysis Window", frame)
+		cv2.imshow("Contador de personas", frame)
 		key = cv2.waitKey(1) & 0xFF
 		# if the `q` key was pressed, break from the loop
 		if key == ord("q"):
