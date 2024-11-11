@@ -228,7 +228,7 @@ def people_counter():
 		# object crosses this line we will determine whether they were
 		# moving 'up' or 'down'
 		cv2.line(frame, (0, H // 2), (W, H // 2), (0, 0, 0), 3)
-		cv2.putText(frame, "-Borde de prediccion - Entrada-", (10, H - ((i * 20) + 200)),
+		cv2.putText(frame, "-Borde de prediccion vvvv Entrada vvvv -", (10, H - ((i * 20) + 200)),
 			cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
 
 		# use the centroid tracker to associate the (1) old object
@@ -303,9 +303,9 @@ def people_counter():
 
 		# construct a tuple of information we will be displaying on the frame
 		info_status = [
-		("Exit", totalUp),
-		("Enter", totalDown),
-		("Status", status),
+		("Salieron", totalUp),
+		("Entraron", totalDown),
+		("Estado", status),
 		]
 
 		info_total = [
